@@ -1,0 +1,7 @@
+
+Aug 16, 2019 12:06:23.31 NEW SESSION
+Aug 16, 2019 12:06:23.31 [5848:5964:0816/120623.306:ERROR:browser_process_sub_thread.cc(203)] Waited 315 ms for network service
+Aug 16, 2019 12:06:46.16 [3716:4664:0816/120646.166:ERROR:browser_process_sub_thread.cc(203)] Waited 176 ms for network service
+
+Aug 16, 2019 12:40:50.71 NEW SESSION
+Aug 16, 2019 12:40:50.71 [4976:1140:0816/124050.706:ERROR:browser_process_sub_thread.cc(203)] Waited 181 ms for network service

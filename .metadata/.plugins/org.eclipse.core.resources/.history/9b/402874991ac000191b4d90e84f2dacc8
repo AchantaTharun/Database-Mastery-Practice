@@ -17,11 +17,11 @@ Password  : <input type="password" name="pword"><br>
 
 Phone : <input type="text" name="phno"><br>
 
-Email : <input type="text" name="mail"><br>
+Email : <input type="text" name="mail"><br><br>
 
-Job : <input type="text" name="job"><br>
+Job : <input type="text" name="job"><br><br>
 
-Salary : <input type="text" name="sal"><br>
+Salary : <input type="text" name="sal"><br><br>
 
 
 <input type="submit"  value="Add Employee"><br>

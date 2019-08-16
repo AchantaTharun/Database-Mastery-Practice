@@ -1,11 +1,6 @@
 
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,26 +47,6 @@ public class addEmployee extends HttpServlet {
         
         String sal=request.getParameter("sal");  
         String phno=request.getParameter("phno");  
-        
-      //  out.println(name);
-        
-        try{   
-    			Class.forName("oracle.jdbc.driver.OracleDriver");  
-    		    
-    			Connection con=DriverManager.getConnection(  
-    			"jdbc:oracle:thin:@192.168.4.187:1521:db122","xxsplashtesting","xxsplashtesting");  
-    			 
-    			Statement stmt=con.createStatement();  
-    			 
-    			ResultSet rs=stmt.executeQuery("select count(*)  from emp");    
-    			rs.next();
-    			System.out.println(rs.getString(1));  
-    			con.close();  
-    			 
-    			}catch(Exception e){ System.out.println(e);}  
-    			  
-    			
-
 	}
 
 }

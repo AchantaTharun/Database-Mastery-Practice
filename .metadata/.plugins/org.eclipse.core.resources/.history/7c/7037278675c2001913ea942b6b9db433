@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Employee</title>
+</head>
+<body>
+
+<form action="addEmployee" method="post">
+
+<br>
+<h1> Add New Employee</h1>
+<br>
+Name : <input type="text" name="ename">
+<br>
+Password  : <input type="password" name="pword"><br>
+
+Phone : <input type="text" name="phno"><br>
+
+Email : <input type="text" name="mail"><br>
+
+Job : <input type="text" name="job"><br>
+
+Salary : <input type="text" name="sal"><br>
+
+
+<input type="submit"  value="Add Employee"><br>
+
+</form>
+
+</body>
+</html>

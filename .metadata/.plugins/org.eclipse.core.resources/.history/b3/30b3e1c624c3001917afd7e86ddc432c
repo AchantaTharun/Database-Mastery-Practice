@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee database management</title>
+</head>
+<body>
+<br>
+<h1>Employee database management</h1>
+<br>
+
+<a href="index.html">Add Employee</a><br>
+<br>
+<br>
+<a href="edit.html">Edit Employee Details</a><br>
+<br>
+<br>
+<a href="delete.html">Delete Employee</a><br>
+<br>
+<br>
+<a href="curd.disEmp.java">Show All Employee</a><br>
+<br>
+<br>
+
+</body>
+</html>

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
 /**
  * Servlet implementation class call
  */
@@ -43,32 +45,42 @@ public class Call extends HttpServlet {
 		
 		response.setContentType("text/html");  
         PrintWriter out=response.getWriter();
-        int id=7839;
+        int id=0;
+        String s=request.getParameter("id");
+        id=Integer.parseInt(s);
         try {
-        	Connection con = null;
-    		
-    		
-    		
-    		
-     
-            Class.forName("oracle.jdbc.driver.OracleDriver");  
-    	    
-    		 con=DriverManager.getConnection(  
-    		"jdbc:oracle:thin:@192.168.4.187:1521:db122","xxsplashtesting","xxsplashtesting");  
-    		
-    		 
+        	Connection con = null;		
+        	con=DatabaseUtil.getConnection();
     		 Statement stmt=con.createStatement();  
 			 
- 			ResultSet rs=stmt.executeQuery("select * from t"); 
- 			while(rs.next()) {
- 				 out.println(rs.getString("name"));
- 			}
+ 			
         CallableStatement cStmt = con.prepareCall("{call display_ename(?)}");
        cStmt.setInt(1,id);
        //cStmt.registerOutParameter(2, java.sql.Types.VARCHAR);
+       
         cStmt.executeUpdate();
        // String name = cStmt.getString(2);
-       // out.println(name);
+       // out.println("here is the name"+name);
+        
+        
+        
+        
+        ResultSet rs=stmt.executeQuery("select * from testers"); 
+			
+			
+			 out.println("<table border=1 width=20% height=20%>");
+             out.println("<tr><th>Tester Name</th><tr>");
+			while(rs.next()) {
+				
+				String n = rs.getString("name");
+                
+				out.println("<tr><td>" + n + "</td></tr>"); 
+			}
+			 out.println("</table>");
+             out.println("</html></body>");
+			
+			out.println("new tester added");
+			
         }catch(Exception e) {
         	System.out.println(e);
         }

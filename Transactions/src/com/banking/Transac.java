@@ -58,7 +58,7 @@ public class Transac extends HttpServlet {
 			con.setAutoCommit(false);
 			Statement stmt = con.createStatement(); 
 			
-			ResultSet rs = stmt.executeQuery("select * from acc where accno='"+a+"' and name = '"+fromname+"'");
+			ResultSet rs = stmt.executeQuery("select * from acc where accno='"+a+"' and name = '"+fromname+"' and pword='"+pword+"'");
 			String fn ="";
 			  int nm=0;
       while(rs.next()) {

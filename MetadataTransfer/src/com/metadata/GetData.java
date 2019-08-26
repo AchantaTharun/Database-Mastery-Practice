@@ -35,8 +35,17 @@ public class GetData extends HttpServlet {
 		            	  
 		            	  Statement stmt=con.createStatement();  
 		            	  
+		            	  ResultSet rs =stmt.executeQuery("select * from emp");
 		            	  DatabaseMetaData metadata = con.getMetaData();
 		            	    ResultSet resultSet = metadata.getColumns(null, null, "emp", null);
+		            	    
+		            	    
+		            	    ResultSetMetaData rsmd=rs.getMetaData();
+		            	   out.println( rsmd.getColumnType(1));
+		            	   out.println( rsmd.getColumnLabel(1)) ;
+		            	   out.println(rsmd.getColumnDisplaySize(1)) ;
+		            	    
+		            	    
 		            	    while (resultSet.next()) {
 		            	      String name = resultSet.getString("COLUMN_NAME");
 		            	      String type = resultSet.getString("TYPE_NAME");

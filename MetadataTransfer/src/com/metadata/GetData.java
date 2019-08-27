@@ -1,6 +1,7 @@
 package com.metadata;
 
 import java.io.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,35 +27,100 @@ public class GetData extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 		
-		              response.setContentType("text/html");
-		              PrintWriter out =response.getWriter();
+		             
+		response.setContentType("text/html");
 		              
-		              try {
+		PrintWriter out =response.getWriter();
+		              
+		String tname=request.getParameter("tname");
+		             
+		// tname="emp";
+		              
+		try {
 		            	  
-		            	  Connection con=DatabaseUtil.getConnection();
 		            	  
-		            	  Statement stmt=con.createStatement();  
+				Connection con=DatabaseUtil.getConnection("oracle.jdbc.driver.OracleDriver","jdbc:oracle:thin:@192.168.4.187:1521:db122","xxsplashtesting","xxsplashtesting");
+		            	 
+				String sql="select * from "+tname;
 		            	  
-		            	  ResultSet rs =stmt.executeQuery("select * from emp");
-		            	  DatabaseMetaData metadata = con.getMetaData();
-		            	    ResultSet resultSet = metadata.getColumns(null, null, "emp", null);
-		            	    
-		            	    
-		            	    ResultSetMetaData rsmd=rs.getMetaData();
-		            	   out.println( rsmd.getColumnType(1));
-		            	   out.println( rsmd.getColumnLabel(1)) ;
-		            	   out.println(rsmd.getColumnDisplaySize(1)) ;
-		            	    
-		            	    
-		            	    while (resultSet.next()) {
-		            	      String name = resultSet.getString("COLUMN_NAME");
-		            	      String type = resultSet.getString("TYPE_NAME");
-		            	      int size = resultSet.getInt("COLUMN_SIZE");
-		            	      out.println("Column name: [" + name + "]; type: [" + type + "]; size: [" + size + "]");
-		            	  }
+				PreparedStatement stmt = con.prepareStatement(sql);
+		            	 
+				out.println("<br> Table name: "+tname+"<br>");
 		            	  
+				ResultSet rs =stmt.executeQuery();
+		            	  
+				DatabaseMetaData metadata = con.getMetaData();
+		            	    
+		            	
+		              
+		            
+				String cNames="";
+		            	
+				String cTypes="";
+		                
+				String cSizes ="";
+		            	   
+				ResultSetMetaData rsmd=rs.getMetaData();
+		            	    
+		            	   
+				int columnCount = rsmd.getColumnCount();
+		            	   
+				for(int i=1 ; i<=columnCount ; i++) {
+		            	    	
+					cNames=rsmd.getColumnLabel(i)+","+cNames;
+		            	    	
+					cTypes= rsmd.getColumnTypeName(i)+","+cTypes;
+		            	    	
+					cSizes =  rsmd.getColumnDisplaySize(i)+ ","+cSizes;
+		            	    	
+					out.println("Column Type: [" +  rsmd.getColumnTypeName(i) + "]; Name: [" + rsmd.getColumnLabel(i) + "]; size: [" + rsmd.getColumnDisplaySize(i) + "]");
+		            	        
+					out.println("<br>");
+		            	   
+				}
+				
+				//out.println(metadata.getPrimaryKeys(null, null, tname));
+				rs = metadata.getPrimaryKeys(null, null, "survey");
+				while (rs.next()) {
+			        String name = rs.getString("TABLE_NAME");
+			        String columnName = rs.getString("COLUMN_NAME");
+			        String keySeq = rs.getString("KEY_SEQ");
+			        String pkName = rs.getString("PK_NAME");
+			        System.out.println("table name :  " + name);
+			        System.out.println("column name:  " + columnName);
+			        System.out.println("sequence in key:  " + keySeq);
+			        System.out.println("primary key name:  " + pkName);
+			        System.out.println("");
+			      }
+				
+		            	  
+				// out.println(cNames);
+		            	  
+				
+		            	   
+				//storing the metadata in MySql database
+		            	    
+				Connection con2 =DatabaseUtil.getConnection("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/testdb", "root", "1234");
+		            	   
+				Statement stmt2=con2.createStatement();
+		            	    
+				int i=stmt2.executeUpdate("insert into metadata(tname, cnames, ctypes, csizes) values('"+tname+"','"+cNames+"','"+cTypes+"', '"+cSizes+"')");
+		            	    
+		            	    if(i==1) {
+		            	    	
+		            	    	out.println("<br>Data saved Success<br>");
+		            	    	
+		            	    	
+		            	    	out.println("<br><form action='createTable' method='get'>Enter name of new table<input type='text' name='name'><input type='hidden' name='s1' value ='"+tname+"'><input type='submit' value='create tabel'></form><br>");
+		            	    }else {
+		            	   
+		            	    	out.println("<br> Data not saved<br>");
+		            	   
+		            	    }
+		            	    
 		              }catch(Exception e) {
-		            	  out.println(e);
+		            	
+		            	  out.println(e.fillInStackTrace());
 		              }
 		
 		

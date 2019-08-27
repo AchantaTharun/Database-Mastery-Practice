@@ -1,0 +1,42 @@
+ 
+Question: 	How do I determine the column type when querying a database?
+Recipe: 	Here's how to get the column type: 
+    //-------------------------------------------------//
+    //  Here's how to determine a column's data type.  //
+    //  This example returns an integer, and the       //
+    //  integer indicates the column's data type.      //
+    //-------------------------------------------------//
+    Statement st = conn.createStatement();
+    ResultSet rs = st.executeQuery("SELECT * from Customer");
+    int colType = rs.getColumnType(1);
+    System.out.println("Column 1 is type " + colType);
+ 
+Discussion: 	You should use the ResultSetMetaData getColumnType() and getColumnTypeName() methods to determine the data type of a column of information returned in a ResultSet. 
+Be aware that getColumnType just returns an integer, so you'll need to know what that integer means. According to the JDK docs, the integer returned corresponds to generic SQL data types as follows: 
+ 
+-7	BIT
+-6	TINYINT
+-5	BIGINT
+-4	LONGVARBINARY 
+-3	VARBINARY
+-2	BINARY
+-1	LONGVARCHAR
+0	NULL
+1	CHAR
+2	NUMERIC
+3	DECIMAL
+4	INTEGER
+5	SMALLINT
+6	FLOAT
+7	REAL
+8	DOUBLE
+12	VARCHAR
+91	DATE
+92	TIME
+93	TIMESTAMP
+1111 	OTHER
+ 
+
+Notes: 	<none>
+Keywords: 	Java, JDBC, ResultSet, ResultSetMetaData, getColumnType, getColumnTypeName
+ 

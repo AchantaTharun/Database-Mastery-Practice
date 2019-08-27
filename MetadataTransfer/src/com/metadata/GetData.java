@@ -80,18 +80,12 @@ public class GetData extends HttpServlet {
 				}
 				
 				//out.println(metadata.getPrimaryKeys(null, null, tname));
-				rs = metadata.getPrimaryKeys(null, null, "survey");
-				while (rs.next()) {
-			        String name = rs.getString("TABLE_NAME");
-			        String columnName = rs.getString("COLUMN_NAME");
-			        String keySeq = rs.getString("KEY_SEQ");
-			        String pkName = rs.getString("PK_NAME");
-			        System.out.println("table name :  " + name);
-			        System.out.println("column name:  " + columnName);
-			        System.out.println("sequence in key:  " + keySeq);
-			        System.out.println("primary key name:  " + pkName);
-			        System.out.println("");
-			      }
+				ResultSet PK = metadata.getPrimaryKeys(null,null, tname);
+				out.println("------------PRIMARY KEYS-------------");
+				while(PK.next())
+				{
+				    out.println(PK.getString("supplier_id") + "===" + PK.getString("supplier_pk"));
+				}
 				
 		            	  
 				// out.println(cNames);

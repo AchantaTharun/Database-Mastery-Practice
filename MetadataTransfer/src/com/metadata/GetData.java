@@ -84,7 +84,7 @@ public class GetData extends HttpServlet {
 				out.println("------------PRIMARY KEYS-------------");
 				while(PK.next())
 				{
-				    out.println(PK.getString("supplier_id") + "===" + PK.getString("supplier_pk"));
+				    out.println("===" + PK.getString(4));
 				}
 				
 		            	  

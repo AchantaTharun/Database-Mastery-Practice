@@ -35,13 +35,14 @@ public class GetData extends HttpServlet {
 		String tname=request.getParameter("tname");
 		             
 		// tname="emp";
-		              
+		tname=tname.toUpperCase();
+		       
 		try {
 		            	  
 		            	  
 				Connection con=DatabaseUtil.getConnection("oracle.jdbc.driver.OracleDriver","jdbc:oracle:thin:@192.168.4.187:1521:db122","xxsplashtesting","xxsplashtesting");
 		            	 
-				String sql="select * from "+tname;
+			/*	String sql="select * from "+tname;
 		            	  
 				PreparedStatement stmt = con.prepareStatement(sql);
 		            	 
@@ -53,32 +54,50 @@ public class GetData extends HttpServlet {
 		            	    
 		            	
 		              
-		            
+		            */
+				
+				
+				//out.println(sql);  
+				Statement stmt=con.createStatement();  
+				 
+				ResultSet rs=stmt.executeQuery("select * from all_tab_columns where TABLE_NAME = '"+tname+"'");
 				String cNames="";
 		            	
 				String cTypes="";
 		                
 				String cSizes ="";
-		            	   
-				ResultSetMetaData rsmd=rs.getMetaData();
+		            int length=rs.getFetchSize();	   
+				//ResultSetMetaData rsmd=rs.getMetaData();
 		            	    
 		            	   
-				int columnCount = rsmd.getColumnCount();
+				//int columnCount = rsmd.getColumnCount();
 		            	   
-				for(int i=1 ; i<=columnCount ; i++) {
+				while(rs.next()) {
 		            	    	
-					cNames=rsmd.getColumnLabel(i)+","+cNames;
+					cNames=rs.getString("COLUMN_NAME")+","+cNames;
 		            	    	
-					cTypes= rsmd.getColumnTypeName(i)+","+cTypes;
+					cTypes= rs.getString("DATA_TYPE")+","+cTypes;
 		            	    	
-					cSizes =  rsmd.getColumnDisplaySize(i)+ ","+cSizes;
+					cSizes =  rs.getString("DATA_LENGTH")+ ","+cSizes;
 		            	    	
-					out.println("Column Type: [" +  rsmd.getColumnTypeName(i) + "]; Name: [" + rsmd.getColumnLabel(i) + "]; size: [" + rsmd.getColumnDisplaySize(i) + "]");
+					out.println("Column Type: [" +  rs.getString("DATA_TYPE") + "]; Name: [" + rs.getString("COLUMN_NAME") + "]; size: [" + rs.getString("DATA_LENGTH") + "]");
 		            	        
 					out.println("<br>");
 		            	   
 				}
+				/*
+				Statement stmt2=con.createStatement(); 
+				//sql="select * from all_constraints where table_name = '"+tname+"'";
+				//stmt2 = con.createStatement();
+				ResultSet ers =stmt2.executeQuery("select * from all_constraints where table_name = '"+tname+"'");
 				
+				while(rs.next()) {
+					
+					out.println("constraint Type: [" +  rs.getString("CONSTRAINT_TYPE") + "]; constraint Name: ["+ rs.getString("CONSTRAINT_NAME") +"]" );
+					
+					
+				}*/
+				/*
 				//out.println(metadata.getPrimaryKeys(null, null, tname));
 				ResultSet PK = metadata.getPrimaryKeys(null,null, tname);
 				out.println("------------PRIMARY KEYS-------------");
@@ -86,7 +105,7 @@ public class GetData extends HttpServlet {
 				{
 				    out.println("===" + PK.getString(4));
 				}
-				
+				*/
 		            	  
 				// out.println(cNames);
 		            	  

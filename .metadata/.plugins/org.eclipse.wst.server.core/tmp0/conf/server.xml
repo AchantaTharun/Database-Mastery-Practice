@@ -149,7 +149,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\Users\Tharun\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\Tharun\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\CURD" path="/CURD" reloadable="true" source="org.eclipse.jst.jee.server:CURD"/><Context docBase="C:\Users\Tharun\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\StoredProcedures" path="/StoredProcedures" reloadable="true" source="org.eclipse.jst.jee.server:StoredProcedures"/><Context docBase="C:\Users\Tharun\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Transactions" path="/Transactions" reloadable="true" source="org.eclipse.jst.jee.server:Transactions"/><Context docBase="C:\Users\Tharun\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MetadataTransfer" path="/MetadataTransfer" reloadable="true" source="org.eclipse.jst.jee.server:MetadataTransfer"/></Host>
+      <Context docBase="C:\Users\Tharun\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\Tharun\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MetadataTransfer" path="/MetadataTransfer" reloadable="true" source="org.eclipse.jst.jee.server:MetadataTransfer"/></Host>
     </Engine>
   </Service>
 </Server>
